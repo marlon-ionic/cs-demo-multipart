@@ -15,7 +15,16 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@cs-demo-multipart/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@cs-demo-multipart/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@cs-demo-multipart/ng-client/feature/cd-http": [
+        "libs/ng-client/feature/cd-http/src/index.ts"
+      ],
+      "@cs-demo-multipart/ng-client/feature/ng-http": [
+        "libs/ng-client/feature/ng-http/src/index.ts"
+      ],
+      "@cs-demo-multipart/ng-client/feature/tabs": [
+        "libs/ng-client/feature/tabs/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
