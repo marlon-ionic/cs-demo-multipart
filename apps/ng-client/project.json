@@ -26,14 +26,16 @@
     "cap-run-android": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx cap run android",
+        "commands": ["nx run ng-client:build:production", "npx cap sync", "npx cap run android"],
+        "parallel": false,
         "cwd": "apps/ng-client"
       }
     },
     "cap-run-ios": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx cap run ios",
+        "commands": ["nx run ng-client:build:production", "npx cap sync", "npx cap run ios"],
+        "parallel": false,
         "cwd": "apps/ng-client"
       }
     },
