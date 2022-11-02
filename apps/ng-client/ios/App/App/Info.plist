@@ -49,5 +49,9 @@
   <string>$(PRODUCT_NAME) camera description.</string>
   <key>NSPhotoLibraryUsageDescription</key>
   <string>$(PRODUCT_NAME) photos description.</string>
+  <key>WKAppBoundDomains</key>
+  <array>
+    <string>http://10.0.0.76</string>
+  </array>
 </dict>
 </plist>

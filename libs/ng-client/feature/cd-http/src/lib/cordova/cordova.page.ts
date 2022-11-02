@@ -2,8 +2,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Environment, ENVIRONMENT }  from '@cs-demo-multipart/shared/environment';
+import { Platform } from '@ionic/angular';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
-
 @Component({
   selector: 'cs-demo-multipart-cordova',
   templateUrl: './cordova.page.html',
@@ -14,7 +14,7 @@ export class CordovaPage implements OnInit {
   uploadForm: FormGroup;
   formData = new FormData();
 
-  constructor(@Inject(ENVIRONMENT) private env: Environment, private http: HTTP) {
+  constructor(@Inject(ENVIRONMENT) private env: Environment, private http: HTTP, private platform: Platform) {
     this.uploadForm = new FormGroup({
       email: new FormControl(''),
       firstName: new FormControl(''),
@@ -25,6 +25,7 @@ export class CordovaPage implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    console.log('init', this.platform.is('cordova'),this.platform.is('capacitor'))
     this.formData = new FormData();
     // await this.callPost();
   }
@@ -35,7 +36,12 @@ export class CordovaPage implements OnInit {
     this.formData.set('lastName', this.uploadForm.get('lastName')?.value);
     this.formData.set('email', this.uploadForm.get('email')?.value);
     try {
-      await this.http.post(`${this.env.apiHost}/file`, this.formData, undefined);
+      const cookieString = this.http.getCookieString('/');
+      console.log('cookieString', cookieString, this.http.getCookieString(location.hostname));
+      this.http.setCookie(this.env.apiHost, `key=helloworld`);
+      //
+      this.http.setDataSerializer('multipart');
+      await this.http.post(`${this.env.apiEndpoint}/file`, this.formData, undefined);
     } catch(e) {
       console.log('error', e);
     }

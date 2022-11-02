@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Environment, ENVIRONMENT }  from '@cs-demo-multipart/shared/environment';
+import { CapacitorCookies } from '@capacitor/core';
 
 @Component({
   selector: 'cs-demo-multipart-ng',
@@ -33,10 +34,21 @@ export class NGPage implements OnInit {
     this.formData.set('firstName', this.uploadForm.get('firstName')?.value);
     this.formData.set('lastName', this.uploadForm.get('lastName')?.value);
     this.formData.set('email', this.uploadForm.get('email')?.value);
-    this.http.post(`${this.env.apiHost}/file`, this.formData)
+    //Doesn't appear to set this cookie currently
+    await CapacitorCookies.setCookie({
+      url: this.env.apiHost,
+      key: 'key',
+      value: 'helloworld-cap-cookie'
+    });
+    this.http.post(`${this.env.apiEndpoint}/file`, this.formData, {
+      withCredentials: true
+    })
     .subscribe(
       {
-        next: result => console.log('done', result),
+        next: result => {
+          console.log('done', result);
+          console.log('cookies', document.cookie);
+        },
         error: e => console.log('error', e)
       })
   }
@@ -55,22 +67,5 @@ export class NGPage implements OnInit {
     }
 
   }
-
-  async callPost() {
-    console.log('callPost', this.formData);
-    try {
-      this.formData.set('BlackBoxId', '0720r7tLPnPcgCKsx2OWmy0sImY0isMZ8hr7Ltg9OQL+jzea');
-      this.formData.set('CheckAmount', '2.25');
-      this.formData.set('Latitude', '80.567');
-      this.formData.set('Longitude', '123.456');
-      this.formData.set('Trace-Id', 'e68861b2-bea7-4d1b-a688-b65c2212e000');
-      this.formData.set('OsVersion', '15.0');
-      this.formData.set('ModelNumber', 'iPhone 12');
-      this.formData.set('PlatformVersion', 'iOS');
-      const response = await this.http.post(`${this.env.apiHost}/file`, this.formData, undefined );
-      console.log('response', response);
-    } catch(e) {
-      console.log('post error', e);
-    }}
 
   }
