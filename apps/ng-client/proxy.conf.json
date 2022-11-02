@@ -1,6 +1,7 @@
 {
   "/api": {
-    "target": "http://localhost:3333",
+    "target": "http://10.0.0.76:3333",
+    // This should be updated to your dev machine's IP if you want to use the API server included
     "secure": false
   }
 }

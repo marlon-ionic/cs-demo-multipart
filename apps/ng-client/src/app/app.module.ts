@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
+import { ENVIRONMENT } from '@cs-demo-multipart/shared/environment';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {
@@ -25,7 +27,10 @@ const routes: Routes = [
     IonicModule.forRoot(),
     RouterModule.forRoot(routes),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: ENVIRONMENT, useValue: environment },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

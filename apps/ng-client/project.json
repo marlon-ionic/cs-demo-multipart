@@ -11,30 +11,31 @@
         "any": {
           "command": "npx cap {args.command}",
           "cwd": "apps/ng-client"
-        },
-        "sync": {
-          "commands": ["nx run ng-client:build:production", "npx cap sync"],
-          "parallel": false,
-          "cwd": "apps/ng-client"
-        },
-        "open-ios": {
-          "command": "npx cap open ios",
-          "cwd": "apps/ng-client"
-        },
-        "open-android": {
-          "command": "npx cap open android",
-          "cwd": "apps/ng-client"
-        },
-        "run-ios": {
-          "command": "npx cap run ios",
-          "cwd": "apps/ng-client"
-        },
-        "run-android": {
-          "command": "npx cap run android",
-          "cwd": "apps/ng-client"
         }
       },
       "defaultConfiguration": "any"
+    },
+    "cap-sync": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx run ng-client:build:production", "npx cap sync"],
+        "parallel": false,
+        "cwd": "apps/ng-client"
+      }
+    },
+    "cap-run-android": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx cap run android",
+        "cwd": "apps/ng-client"
+      }
+    },
+    "cap-run-ios": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx cap run ios",
+        "cwd": "apps/ng-client"
+      }
     },
     "build": {
       "executor": "@angular-devkit/build-angular:browser",

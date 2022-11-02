@@ -44,8 +44,6 @@ export class AppController {
     @Body() body: MyForm,
     @UploadedFiles() files: { oneImage?: Express.Multer.File[], anotherImage?: Express.Multer.File[] }) {
     console.log(files);
-    return {
-      body
-    };
+    return body;
   }
 }

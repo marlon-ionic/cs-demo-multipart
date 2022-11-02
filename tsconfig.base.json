@@ -24,6 +24,9 @@
       ],
       "@cs-demo-multipart/ng-client/feature/tabs": [
         "libs/ng-client/feature/tabs/src/index.ts"
+      ],
+      "@cs-demo-multipart/shared/environment": [
+        "libs/shared/environment/src/index.ts"
       ]
     }
   },

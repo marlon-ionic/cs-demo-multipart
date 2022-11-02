@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Environment, ENVIRONMENT }  from '@cs-demo-multipart/shared/environment';
 
 @Component({
   selector: 'cs-demo-multipart-ng',
@@ -12,7 +13,7 @@ export class NGPage implements OnInit {
   uploadForm: FormGroup;
   formData = new FormData();
 
-  constructor(private http: HttpClient) {
+  constructor(@Inject(ENVIRONMENT) private env: Environment, private http: HttpClient) {
     this.uploadForm = new FormGroup({
       email: new FormControl(''),
       firstName: new FormControl(''),
@@ -32,7 +33,7 @@ export class NGPage implements OnInit {
     this.formData.set('firstName', this.uploadForm.get('firstName')?.value);
     this.formData.set('lastName', this.uploadForm.get('lastName')?.value);
     this.formData.set('email', this.uploadForm.get('email')?.value);
-    this.http.post('/api/file', this.formData)
+    this.http.post(`${this.env.apiHost}/file`, this.formData)
     .subscribe(
       {
         next: result => console.log('done', result),
@@ -66,7 +67,7 @@ export class NGPage implements OnInit {
       this.formData.set('OsVersion', '15.0');
       this.formData.set('ModelNumber', 'iPhone 12');
       this.formData.set('PlatformVersion', 'iOS');
-      const response = await this.http.post('http://10.0.0.76:5025/api/test', this.formData, undefined );
+      const response = await this.http.post(`${this.env.apiHost}/file`, this.formData, undefined );
       console.log('response', response);
     } catch(e) {
       console.log('post error', e);

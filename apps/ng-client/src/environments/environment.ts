@@ -1,9 +1,11 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+import { Environment } from '@cs-demo-multipart/shared/environment';
 
-export const environment = {
-  production: false,
+export const environment: Environment = {
+  apiHost: 'http://10.0.0.76:3333/api',
+  production: false
 };
 
 /*
