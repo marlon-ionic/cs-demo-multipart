@@ -1,1 +1,26 @@
-<p>cordova works!</p>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Angular HttpClient
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Angular HttpClient</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup] = "uploadForm" (ngSubmit)="onSubmit()">
+    <ion-input placeholder="First Name" formControlName="firstName"></ion-input>
+    <ion-input placeholder="Last Name" formControlName="lastName"></ion-input>
+    <ion-input placeholder="Email" formControlName="email"></ion-input>
+    <input formControlName="oneImage" name="front" title="front" placeholder="Front Image" type="file" accept="image/png, image/jpeg" (change)="uploadChange('oneImage', $event)"/>
+    <input formControlName="anotherImage" name="back"  title="back"  placeholder="Back Image"  type="file" accept="image/png, image/jpeg" (change)="uploadChange('anotherImage', $event)"/>
+    <div>
+      <ion-button color="primary" type="submit">Upload</ion-button>
+    </div>
+  </form>
+</ion-content>
